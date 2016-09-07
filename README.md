@@ -18,6 +18,8 @@ Uses [Esputnik API](https://esputnik.com.ua/api/index.html).
 require_once 'vendor/autoload.php';
 
 $client = new \Esputnik\Client();
+$client->authenticate('login', 'password');
+
 $repositories = $client->api('balance')->show();
 ```
 
