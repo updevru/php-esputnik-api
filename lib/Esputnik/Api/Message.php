@@ -12,6 +12,7 @@ class Message extends AbstractApi
 {
     /**
      * Отправка рассылки по заранее созданному сообщению. Сообщение может дополнительно параметризироваться.
+     *
      * @param int             $id
      * @param ContactModel    $contact
      * @param boolean         $isEmail
@@ -19,7 +20,7 @@ class Message extends AbstractApi
      * @param string          $fromName
      * @param array|null      $recipients
      * @param GroupModel|null $group
-     * @return string
+     * @return \Psr\Http\Message\StreamInterface
      */
     public function send(
         $id,
@@ -70,6 +71,17 @@ class Message extends AbstractApi
         return $this->post('message/'.rawurlencode($id).'/smartsend', $queryParams);
     }
 
+    /**
+     * Отправить email-сообщение. Если контакта с таким адресом нет, он будет создан.
+     *
+     * @param $from
+     * @param $subject
+     * @param $htmlText
+     * @param $plainText
+     * @param array $emails
+     * @param array $tags
+     * @return \Psr\Http\Message\StreamInterface
+     */
     public function email($from, $subject, $htmlText, $plainText, array $emails, array $tags)
     {
         $queryParams = [
@@ -84,6 +96,12 @@ class Message extends AbstractApi
         return $this->post('message/email/', $queryParams);
     }
 
+    /**
+     * Получить статус одиночного email сообщения.
+     *
+     * @param $ids
+     * @return \Psr\Http\Message\StreamInterface
+     */
     public function emailStatus($ids)
     {
         return $this->get('message/email/status/', [
@@ -91,7 +109,18 @@ class Message extends AbstractApi
         ]);
     }
 
-    public function sms($from, $text, array $tags, array $phoneNumbers = null, $groupId = null)
+    /**
+     * Отправить sms-сообщение. Если контакта с таким номером телефона нет, он будет создан.
+     *
+     * @param string $from
+     * @param string $text
+     * @param string[] $tags
+     * @param string[] $phoneNumbers
+     * @param int|null $groupId
+     * @return \Psr\Http\Message\StreamInterface
+     * @throws MissingArgumentException
+     */
+    public function sms($from, $text, array $tags = [], array $phoneNumbers = [], $groupId = null)
     {
         $queryParams = [
             'from' => $from,
@@ -101,16 +130,25 @@ class Message extends AbstractApi
             throw new MissingArgumentException(['phoneNumbers', 'groupId']);
         }
 
-        if ($phoneNumbers) {
+        if (empty($phoneNumbers)) {
             $queryParams['phoneNumbers'] = $phoneNumbers;
         }
         if ($groupId) {
             $queryParams['groupId'] = $groupId;
         }
+        if (empty($tags)) {
+            $queryParams['tags'] = $tags;
+        }
 
         return $this->post('message/sms/', $queryParams);
     }
 
+    /**
+     * Получить статус одиночного sms сообщения.
+     *
+     * @param $ids
+     * @return \Psr\Http\Message\StreamInterface
+     */
     public function smsStatus($ids)
     {
         return $this->get('message/sms/status/', [

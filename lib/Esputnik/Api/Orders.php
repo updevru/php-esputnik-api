@@ -2,9 +2,7 @@
 
 namespace Esputnik\Api;
 
-use Esputnik\Exception\RuntimeException;
-
-class Event extends AbstractApi
+class Orders extends AbstractApi
 {
     public function add()
     {

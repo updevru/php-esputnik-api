@@ -61,7 +61,7 @@ abstract class AbstractApi
      * @param string $path Request path.
      * @param array $parameters POST parameters to be JSON encoded
      *
-     * @return string
+     * @return \Psr\Http\Message\StreamInterface
      */
     protected function post($path, $parameters = [])
     {
@@ -77,7 +77,7 @@ abstract class AbstractApi
      * @param string $path           Request path.
      * @param $body                     array body.
      *
-     * @return mixed|string
+     * @return \Psr\Http\Message\StreamInterface
      */
     protected function postRaw($path, $body)
     {

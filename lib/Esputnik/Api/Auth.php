@@ -4,9 +4,9 @@ namespace Esputnik\Api;
 
 use Esputnik\Exception\RuntimeException;
 
-class Event extends AbstractApi
+class Auth extends AbstractApi
 {
-    public function add()
+    public function token()
     {
         throw new RuntimeException('This method is not realized yet');
     }
