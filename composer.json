@@ -1,0 +1,30 @@
+{
+    "name": "n10ty/php-esputnik-api",
+    "description": "Library for e-sputnik.com REST api",
+    "type": "library",
+    "keywords": ["esputnik", "e-sputnik.com", "api"],
+    "license": "MIT",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "Andrey Mazuryan",
+            "email": "a.mazuryan@gmail.com"
+        }
+    ],
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php":             ">=5.4.0",
+        "ext-curl":        "*",
+        "guzzlehttp/guzzle":   "6.2.1",
+        "jms/serializer": "^1.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "Esputnik\\": "lib/Esputnik/" }
+    }
+}
