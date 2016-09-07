@@ -9,6 +9,12 @@ Uses [Esputnik API](https://esputnik.com.ua/api/index.html).
 * [Guzzle 6.0+](https://github.com/guzzle/guzzle) library,
 * (optional) PHPUnit to run tests.
 
+## Installing
+
+```
+composer require n10ty/php-esputnik-api
+```
+
 ## Basic usage
 
 ```php
