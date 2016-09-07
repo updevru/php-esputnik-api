@@ -12,12 +12,12 @@ class Message extends AbstractApi
 {
     /**
      * Отправка рассылки по заранее созданному сообщению. Сообщение может дополнительно параметризироваться.
-     * @param int        $id
+     * @param int             $id
      * @param ContactModel    $contact
-     * @param boolean    $isEmail
+     * @param boolean         $isEmail
      * @param MessageParam[]  $params
-     * @param string     $fromName
-     * @param array|null $recipients
+     * @param string          $fromName
+     * @param array|null      $recipients
      * @param GroupModel|null $group
      * @return string
      */
@@ -97,14 +97,14 @@ class Message extends AbstractApi
             'from' => $from,
             'text' => $text,
         ];
-        if(!$phoneNumbers and !$groupId) {
+        if (!$phoneNumbers and !$groupId) {
             throw new MissingArgumentException(['phoneNumbers', 'groupId']);
         }
 
-        if($phoneNumbers) {
+        if ($phoneNumbers) {
             $queryParams['phoneNumbers'] = $phoneNumbers;
         }
-        if($groupId) {
+        if ($groupId) {
             $queryParams['groupId'] = $groupId;
         }
 

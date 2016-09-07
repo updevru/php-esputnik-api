@@ -36,10 +36,10 @@ class EmailMessage
 
     /**
      * EmailMessage constructor.
-     * @param string $name
-     * @param string $from
-     * @param string $subject
-     * @param string $htmlText
+     * @param string   $name
+     * @param string   $from
+     * @param string   $subject
+     * @param string   $htmlText
      * @param string[] $tags
      */
     public function __construct($name, $from, $subject, $htmlText, array $tags = [])

@@ -2,7 +2,6 @@
 
 namespace Esputnik\Model;
 
-
 class ContactField
 {
     private $id;

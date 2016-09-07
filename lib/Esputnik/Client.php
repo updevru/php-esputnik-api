@@ -24,7 +24,7 @@ class Client
 
     private $httpClient;
 
-    public function __construct( $httpClient = null)
+    public function __construct($httpClient = null)
     {
         $this->httpClient = $httpClient;
     }

@@ -32,7 +32,7 @@ class HttpClient
 
         $this->options = array_merge($this->options, $options);
         $client = $client ?: new GuzzleClient([
-            'base_uri' => sprintf('%s%s/',$this->options['base_url'],$this->options['api_version']),
+            'base_uri' => sprintf('%s%s/', $this->options['base_url'], $this->options['api_version']),
             'auth' => [$this->options['login'], $this->options['password']],
             'debug' => true,
             'headers' => $this->headers,
