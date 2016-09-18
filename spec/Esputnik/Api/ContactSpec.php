@@ -46,4 +46,30 @@ class ContactSpec extends ObjectBehavior
 
         $this->add($contact);
     }
+
+    public function it_should_search_contact_activity(Client $client, HttpClient $httpClient)
+    {
+        $client
+            ->getHttpClient()
+            ->willReturn($httpClient)
+        ;
+
+        $query = [
+            'dateFrom' => '2015-03-03',
+            'dateTo' => '2015-04-04',
+            'email' => 'email.com',
+            'sms' => '09320321323',
+            'messageTag' => 'tag1',
+            'activityStatus' => 'ACTIVE'
+        ];
+        $httpClient
+            ->get('contactActivity/', $query , ['maxrows' => 10, 'startindex' => 11])
+            ->willReturn(new Response())
+            ->shouldBeCalled()
+        ;
+
+        $this->activity(new \DateTime('2015-03-03'), new \DateTime('2015-04-04'), 'email.com', '09320321323', 'tag1', 'ACTIVE', ['maxrows' => 10, 'startindex' => 11]);
+    }
+
+
 }

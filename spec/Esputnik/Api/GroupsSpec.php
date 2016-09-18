@@ -29,12 +29,12 @@ class GroupsSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('groups/', ['name' => 'name'])
+            ->get('groups/', ['name' => 'name'], ['maxrows' => 10, 'startindex' => 99])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
 
-        $this->search('name');
+        $this->search('name', ['maxrows' => 10, 'startindex' => 99]);
     }
 
     function it_should_show_all_groups(Client $client, HttpClient $httpClient)
@@ -45,11 +45,11 @@ class GroupsSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('groups/', [])
+            ->get('groups/', [], ['maxrows' => 10, 'startindex' => 99])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
 
-        $this->all();
+        $this->all(['maxrows' => 10, 'startindex' => 99]);
     }
 }

@@ -14,9 +14,9 @@ class Contacts extends AbstractApi
         return $this->get('contacts/');
     }
 
-    public function search()
+    public function search($query, $parameters = [])
     {
-        throw new \Exception();
+        return $this->get('contacts/', $query = [], $parameters);
     }
 
     /**

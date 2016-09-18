@@ -29,11 +29,11 @@ class CalloutsSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('callouts/sms/', [])
+            ->get('callouts/sms/', [], ['maxrows' => 30, 'startindex' => 300])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
 
-        $this->sms();
+        $this->sms(['maxrows' => 30, 'startindex' => 300]);
     }
 }

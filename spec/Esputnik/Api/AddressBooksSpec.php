@@ -29,7 +29,7 @@ class AddressBooksSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('addressbooks/', [])
+            ->get('addressbooks/', [], [])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;

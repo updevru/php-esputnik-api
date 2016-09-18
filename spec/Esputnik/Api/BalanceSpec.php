@@ -29,7 +29,7 @@ class BalanceSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('balance/', [])
+            ->get('balance/', [], [])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;

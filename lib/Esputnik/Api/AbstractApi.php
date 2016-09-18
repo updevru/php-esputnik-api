@@ -27,14 +27,16 @@ abstract class AbstractApi
     /**
      * Send a GET request with query parameters.
      *
-     * @param string $path           Request path.
-     * @param array  $parameters     GET parameters.
+     * @param string $path Request path.
+     * @param array $query GET parameters.
      *
+     * @param array $parameters
      * @return \Psr\Http\Message\StreamInterface
      */
-    protected function get($path, array $parameters = [])
+    protected function get($path, array $query = [], $parameters = [])
     {
-        $response = $this->client->getHttpClient()->get($path, $parameters);
+
+        $response = $this->client->getHttpClient()->get($path, $query, $parameters);
 
         return ResponseMediator::getContent($response);
     }

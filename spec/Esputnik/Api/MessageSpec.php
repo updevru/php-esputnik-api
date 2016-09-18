@@ -30,15 +30,13 @@ class MessageSpec extends ObjectBehavior
     {
         $client
             ->getHttpClient()
-            ->willReturn($httpClient)
-        ;
+            ->willReturn($httpClient);
 
         $json = '{"email":true,"params":[{"key":"key","value":"value"}],"fromName":"Sender","recipients":["email1@mail.ru","email2@mail.ru"]}';
         $httpClient
             ->post('message/7/send', $json)
             ->willReturn(new Response())
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $contact = new ContactModel(
             'firstName',
@@ -61,15 +59,13 @@ class MessageSpec extends ObjectBehavior
     {
         $client
             ->getHttpClient()
-            ->willReturn($httpClient)
-        ;
+            ->willReturn($httpClient);
 
         $json = '{"recipients":[{"email":"email@gmailc.om","jsonParam":"[{\"key\":\"key\",\"value\":\"value\"}]","locator":"locator"}],"email":true,"fromName":"fromemail@gmail.com"}';
         $httpClient
             ->post('message/7/smartsend', $json)
             ->willReturn(new Response())
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $contact = new ContactModel(
             'firstName',
@@ -98,15 +94,13 @@ class MessageSpec extends ObjectBehavior
     {
         $client
             ->getHttpClient()
-            ->willReturn($httpClient)
-        ;
+            ->willReturn($httpClient);
 
         $json = '{"from":"sender@gmail.com","subject":"Subject","htmlText":"<html><body><h1>\u0422\u0415\u0421\u0422!<\/h1><\/body><\/html>","plainText":"plainText","emails":["receive1@gmail.com","receive2@gmail.com"],"tags":["tag1"]}';
         $httpClient
             ->post('message/email/', $json)
             ->willReturn(new Response())
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $this->email(
             'sender@gmail.com',
@@ -122,15 +116,13 @@ class MessageSpec extends ObjectBehavior
     {
         $client
             ->getHttpClient()
-            ->willReturn($httpClient)
-        ;
+            ->willReturn($httpClient);
 
 
         $httpClient
-            ->get('message/email/status/', ['ids' => 'id1,id2'])
+            ->get('message/email/status/', ['ids' => 'id1,id2'], [])
             ->willReturn(new Response())
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $this->emailStatus(['id1', 'id2']);
     }
@@ -139,16 +131,14 @@ class MessageSpec extends ObjectBehavior
     {
         $client
             ->getHttpClient()
-            ->willReturn($httpClient)
-        ;
+            ->willReturn($httpClient);
 
-        $json = '{"from":"from@email.com","text":"smstext","phoneNumbers":[380999135853,2499311313],"groupId":2}';
+        $json = '{"from":"from@email.com","text":"smstext","phoneNumbers":[380999135853,2499311313],"groupId":2,"tags":["tag1"]}';
 
         $httpClient
             ->post('message/sms/', $json)
             ->willReturn(new Response())
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $this->sms('from@email.com', 'smstext', ['tag1'], [380999135853, 2499311313], 2);
     }
@@ -157,15 +147,12 @@ class MessageSpec extends ObjectBehavior
     {
         $client
             ->getHttpClient()
-            ->willReturn($httpClient)
-        ;
-
+            ->willReturn($httpClient);
 
         $httpClient
-            ->get('message/sms/status/', ['ids' => 'id1,id2'])
+            ->get('message/sms/status/', ['ids' => 'id1,id2'], [])
             ->willReturn(new Response())
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $this->smsStatus(['id1', 'id2']);
     }

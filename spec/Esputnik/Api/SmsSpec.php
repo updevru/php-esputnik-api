@@ -29,12 +29,12 @@ class SmsSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('messages/sms', [])
+            ->get('messages/sms', [], ['maxrows' => 10, 'startindex' => 99])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
 
-        $this->all();
+        $this->all(['maxrows' => 10, 'startindex' => 99]);
     }
 
     function it_should_search_sms(Client $client, HttpClient $httpClient)
@@ -45,11 +45,11 @@ class SmsSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('messages/sms', ['search' => 'query'])
+            ->get('messages/sms', ['search' => 'query'], ['maxrows' => 10, 'startindex' => 99])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
 
-        $this->search('query');
+        $this->search('query', ['maxrows' => 10, 'startindex' => 99]);
     }
 }

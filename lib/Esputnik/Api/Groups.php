@@ -4,15 +4,26 @@ namespace Esputnik\Api;
 
 class Groups extends AbstractApi
 {
-    public function search($name)
+    /**
+     * Поиск группы
+     *
+     * @param $name
+     * @param array $parameters
+     * @return \Psr\Http\Message\StreamInterface
+     */
+    public function search($name, $parameters = [])
     {
-        return $this->get('groups/', [
-            'name' => $name,
-        ]);
+        return $this->get('groups/', ['name' => $name], $parameters);
     }
 
-    public function all()
+    /**
+     * Показать все группы
+     *
+     * @param array $parameters
+     * @return \Psr\Http\Message\StreamInterface
+     */
+    public function all($parameters = [])
     {
-        return $this->get('groups/');
+        return $this->get('groups/', [], $parameters);
     }
 }

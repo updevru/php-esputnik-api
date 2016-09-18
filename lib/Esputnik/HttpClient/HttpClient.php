@@ -13,8 +13,8 @@ class HttpClient
 {
     protected $options = [
         'api_version' => 'v1',
-        'user_agent'  => 'php-esputnik-api (http://)',
-        'cache_dir'   => null,
+        'user_agent' => 'php-esputnik-api (http://)',
+        'cache_dir' => null,
         'content_type' => 'application/json; charset=UTF-8',
     ];
 
@@ -23,7 +23,7 @@ class HttpClient
     protected $lastResponse;
 
     /**
-     * @param array           $options
+     * @param array $options
      * @param ClientInterface $client
      */
     public function __construct(array $options = [], ClientInterface $client = null)
@@ -73,9 +73,17 @@ class HttpClient
     /**
      * {@inheritDoc}
      */
-    public function get($path, array $parameters = [])
+    public function get($path, array $query = [], $parameters = [])
     {
-        $this->options['query'] = $parameters;
+        $this->options['query'] = $query;
+
+        if (isset($parameters['maxrows'])) {
+            $this->options['query']['maxrows'] = $parameters['maxrows'];
+        }
+
+        if (isset($parameters['startindex'])) {
+            $this->options['query']['startindex'] = $parameters['startindex'];
+        }
 
         return $this->request($path, null, 'GET');
     }
@@ -127,7 +135,7 @@ class HttpClient
             throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->lastRequest  = $request;
+        $this->lastRequest = $request;
         $this->lastResponse = $response;
 
         return $response;

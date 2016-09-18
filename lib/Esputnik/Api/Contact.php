@@ -28,7 +28,7 @@ class Contact extends AbstractApi
      */
     public function update($id, ContactModel $contact)
     {
-        return $this->put('contact/'.rawurlencode($id), $contact);
+        return $this->put('contact/' . rawurlencode($id), $contact);
     }
 
     /**
@@ -50,7 +50,7 @@ class Contact extends AbstractApi
      */
     public function show($id)
     {
-        return $this->get('contact/'.rawurlencode($id));
+        return $this->get('contact/' . rawurlencode($id));
     }
 
     /**
@@ -79,10 +79,49 @@ class Contact extends AbstractApi
     }
 
     /**
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @param null $email
+     * @param null $sms
+     * @param null $messageTag
+     * @param null $activityStatus
+     * @param array $parameters
      * @return \Psr\Http\Message\StreamInterface
      */
-    public function activity()
+    public function activity(
+        \DateTime $dateFrom = null,
+        \DateTime $dateTo = null,
+        $email = null,
+        $sms = null,
+        $messageTag = null,
+        $activityStatus = null,
+        $parameters = [])
     {
-        return $this->get('contactActivity/');
+        $query = [];
+        if ($dateFrom) {
+            $query['dateFrom'] = $dateFrom->format('Y-m-d');
+        }
+
+        if ($dateTo) {
+            $query['dateTo'] = $dateTo->format('Y-m-d');
+        }
+
+        if ($email) {
+            $query['email'] = $email;
+        }
+
+        if($sms) {
+            $query['sms'] = $sms;
+        }
+
+        if($messageTag) {
+            $query['messageTag'] = $messageTag;
+        }
+
+        if($activityStatus) {
+            $query['activityStatus'] = $activityStatus;
+        }
+
+        return $this->get('contactActivity/', $query, $parameters);
     }
 }

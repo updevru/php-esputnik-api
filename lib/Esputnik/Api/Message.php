@@ -130,13 +130,13 @@ class Message extends AbstractApi
             throw new MissingArgumentException(['phoneNumbers', 'groupId']);
         }
 
-        if (empty($phoneNumbers)) {
+        if (!empty($phoneNumbers)) {
             $queryParams['phoneNumbers'] = $phoneNumbers;
         }
         if ($groupId) {
             $queryParams['groupId'] = $groupId;
         }
-        if (empty($tags)) {
+        if (!empty($tags)) {
             $queryParams['tags'] = $tags;
         }
 

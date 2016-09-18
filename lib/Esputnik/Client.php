@@ -17,8 +17,8 @@ class Client
     protected $options = [
         'base_url' => 'https://esputnik.com/api/',
         'api_version' => 'v1',
-        'user_agent'  => 'php-esputnik-api (http://)',
-        'cache_dir'   => null,
+        'user_agent' => 'php-esputnik-api (http://)',
+        'cache_dir' => null,
         'content_type' => 'application/json; charset=UTF-8',
     ];
 

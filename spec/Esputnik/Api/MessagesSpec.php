@@ -55,12 +55,12 @@ class MessagesSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('messages/email/', [])
+            ->get('messages/email/', [], ['maxrows' => 10, 'startindex' => 99])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
 
-        $this->all();
+        $this->all(['maxrows' => 10, 'startindex' => 99]);
     }
 
     function it_should_search_emails(Client $client, HttpClient $httpClient)
@@ -71,12 +71,12 @@ class MessagesSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('messages/email/', ['search' => 'somevalue'])
+            ->get('messages/email/', ['search' => 'somevalue'], ['maxrows' => 10, 'startindex' => 99])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
 
-        $this->search('somevalue');
+        $this->search('somevalue', ['maxrows' => 10, 'startindex' => 99]);
     }
 
     function it_should_show_email(Client $client, HttpClient $httpClient)
@@ -87,7 +87,7 @@ class MessagesSpec extends ObjectBehavior
         ;
 
         $httpClient
-            ->get('messages/email/7', [])
+            ->get('messages/email/7', [], [])
             ->willReturn(new Response())
             ->shouldBeCalled()
         ;
