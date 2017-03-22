@@ -39,7 +39,7 @@ class Contact extends AbstractApi
      */
     public function remove($id)
     {
-        return $this->delete('contact/', rawurlencode($id));
+        return $this->delete('contact/' . rawurlencode($id));
     }
 
     /**
