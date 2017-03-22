@@ -7,16 +7,17 @@ class Contacts extends AbstractApi
     /**
      * Поиск контактов.
      *
+     * @param int $offset
      * @return \Psr\Http\Message\StreamInterface
      */
-    public function all()
+    public function all($offset = 1)
     {
-        return $this->get('contacts/');
+        return $this->get('contacts/', ['startindex' => $offset]);
     }
 
     public function search($query, $parameters = [])
     {
-        return $this->get('contacts/', $query = [], $parameters);
+        return $this->get('contacts/', $query, $parameters);
     }
 
     /**

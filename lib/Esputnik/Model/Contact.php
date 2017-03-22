@@ -68,6 +68,14 @@ class Contact
     }
 
     /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
      * @return array
      */
     public function getChannels()
