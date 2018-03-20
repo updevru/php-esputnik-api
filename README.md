@@ -12,7 +12,7 @@ Uses [Esputnik API](https://esputnik.com.ua/api/index.html).
 ## Installing
 
 ```
-composer require n10ty/php-esputnik-api
+composer require updevru/php-esputnik-api dev-master
 ```
 
 ## Basic usage
