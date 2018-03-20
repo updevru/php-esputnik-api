@@ -74,15 +74,18 @@ class Message extends AbstractApi
     /**
      * Отправить email-сообщение. Если контакта с таким адресом нет, он будет создан.
      *
-     * @param $from
-     * @param $subject
-     * @param $htmlText
-     * @param $plainText
-     * @param array $emails
-     * @param array $tags
+     * @param $from Адрес отправителя (должен совпадать с одним из существующих адресов отправителя в системе). Формат адреса отправителя: "\"имя\" "
+     * @param $subject Тема сообщения.
+     * @param $htmlText HTML-код сообщения.
+     * @param $plainText Вариант сообщения в виде простого текста.
+     * @param array $emails Список адресов получателей.
+     * @param array $tags Список меток, которые будут присвоены сообщению.
+     * @param int $campaignId Служебное поле
+     * @param string $externalRequestId Внешний идентификатор запроса. Если передано несколько получателей - будет одинаковый для всех
+     * @param bool $skipPersonalisation Пропустить песонализацию сообщения
      * @return \Psr\Http\Message\StreamInterface
      */
-    public function email($from, $subject, $htmlText, $plainText, array $emails, array $tags)
+    public function email($from, $subject, $htmlText, $plainText, array $emails, array $tags, int $campaignId=0, string $externalRequestId='', bool $skipPersonalisation=true)
     {
         $queryParams = [
             'from' => $from,
@@ -91,6 +94,9 @@ class Message extends AbstractApi
             'plainText' => $plainText,
             'emails' => $emails,
             'tags' => $tags,
+            'campaignId' => $campaignId,
+            'externalRequestId' => $externalRequestId,
+            'skipPersonalisation' => $skipPersonalisation
         ];
 
         return $this->post('message/email/', $queryParams);
